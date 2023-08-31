@@ -1,0 +1,418 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">Brief Plan - Artworks List</div>
+        <!-- Actions -->
+        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+            <!-- Search -->
+            <a routerLink="brief/list-osm" class="ml-4" mat-flat-button [color]="'primary'">
+                <span class="ml-2 mr-1">OSM List</span>
+            </a>
+            <!-- Add product button -->
+            <button class="ml-4" (click)="openNewBrief()" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">Create Artwork</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- search -->
+    <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
+        <form [formGroup]="filterForm">
+            <div class="flex flex-auto">
+                <div class="flex flex-col w-1/6">
+                    <mat-form-field class="search-box w-full xs:ml-0">
+                        <mat-select [formControlName]="'asset_type'">
+                            <mat-option value="default">Asset Type</mat-option>
+                            <mat-option *ngFor="let asset_type of asset_types ; let i = index;" [value]="asset_type.id">
+                                {{asset_type.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col w-5/6">
+                    <mat-form-field class="w-full">
+                        <input matInput [formControlName]="'searchInputControl'" [autocomplete]="'off'"
+                            [placeholder]="'Search for Code , Name'">
+                        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <button mat-stroked-button class="w-fit" style="min-height: 48px;" (click)="resetForm()">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:refresh'"></mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+
+        <!-- Products list -->
+        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+            <ng-container *ngIf="(products$ | async) as products">
+                <ng-container *ngIf="products.length > 0; else noProducts">
+                    <div class="grid">
+                        <!-- Header -->
+                        <div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                            matSort matSortDisableClear>
+                            <div></div>
+
+                            <div class="hidden md:block" [mat-sort-header]="'asset_type.id'">
+                                Asset Type
+                            </div>
+                            <div class="hidden sm:block" [mat-sort-header]="'lot'">
+                                Lot
+                            </div>
+
+                            <div class="hidden lg:block">
+                                Store Type
+                            </div>
+
+                            <div class="hidden lg:block" [mat-sort-header]="'assets.effective_date'">
+                                Effective Date
+                            </div>
+
+                            <div class="hidden lg:block" [mat-sort-header]="'assets.expire_date'">
+                                Expiry Date
+                            </div>
+
+                            <div class="hidden lg:block" [mat-sort-header]="'status'">
+                                Status
+                            </div>
+                            <div class="hidden sm:block"></div>
+                            <div class="hidden sm:block"></div>
+                            <div class="hidden sm:block"></div>
+
+                        </div>
+                        <!-- Rows -->
+                        <ng-container *ngIf="(products$ | async) as products">
+                            <ng-container *ngFor="let product of products; let i = index">
+                                <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+                                    <!-- no -->
+                                    <div>
+                                        {{ (pagination.page * pagination.size) + (i + 1) }}
+                                    </div>
+
+                                    <!-- asset type -->
+                                    <div class="hidden md:block truncate">
+                                        <div *ngIf="product.attributes.asset_type != null">
+                                            <div *ngIf="product.attributes.asset_type.data != null">
+                                                <div *ngIf="product.attributes.asset_type.data.attributes != null">
+                                                    {{product.attributes.asset_type.data.attributes.name}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- lot -->
+                                    <div class="hidden sm:block">
+                                        {{product.attributes.lot ? product.attributes.lot : '-'}}
+                                    </div>
+
+                                    <!-- store type -->
+                                    <div class="hidden sm:block">
+                                        {{product.attributes.store_type ? product.attributes.store_type : '-'}}
+                                    </div>
+
+                                    <!-- effective date -->
+                                    <div class="hidden sm:block">
+                                        <ng-container *ngIf="product.attributes.assets.data[0]">
+                                            <ng-container
+                                                *ngIf="product.attributes.assets.data[0].attributes.effective_date">
+                                                {{product.attributes.assets.data[0].attributes.effective_date | date}}
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+
+                                    <!-- expiry date -->
+                                    <div class="hidden sm:block">
+                                        <ng-container *ngIf="product.attributes.assets.data[0]">
+                                            <ng-container
+                                                *ngIf="product.attributes.assets.data[0].attributes.expire_date">
+                                                {{product.attributes.assets.data[0].attributes.expire_date | date}}
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+
+                                    <!-- status -->
+                                    <div class="hidden sm:block">
+                                        <ng-container>
+                                            <div class="py-0.5 px-3 rounded-full text-base font-semibold text-center bg-opacity-10"
+                                                [ngClass]="{
+                                                    'text-[#27AE60] bg-[#27AE60]': product.attributes.status === 'brief' || product.attributes.status === 'approved',
+                                                    'text-[#F6B866] bg-[#F6B866]':
+                                                        product.attributes.status === 'wait_approve_translation' ||
+                                                        product.attributes.status === 'wait_approve_artwork' ||
+                                                        product.attributes.status === 'waiting_for_confirm_price' ||
+                                                        product.attributes.status === 'draft',
+                                                    'text-[#2D9CDB] bg-[#2D9CDB]': product.attributes.status === 'translation_approved',
+                                                    'text-[#eb5757] bg-[#eb5757]': product.attributes.status === 'rejected_translation' || product.attributes.status === 'rejected'}">
+                                                <ng-container
+                                                    *ngIf="me.role.type == 'supplier' && product.attributes.status == 'brief'; else other">
+                                                    &#8226; {{ textStatus('pending_translation') }}
+                                                </ng-container>
+                                                <ng-template #other>
+                                                    &#8226; {{ textStatus(product.attributes.status) }}
+                                                </ng-template>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                    <div></div>
+                                    <div>
+                                        <button class="min-w-10 min-h-7 h-7 px-2 leading-6" mat-stroked-button
+                                            (click)="toggleDetails(product.id)">
+                                            <mat-icon class="icon-size-5"
+                                                [svgIcon]="selectedProduct?.id === product.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'">
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+
+                                    <!-- Details button -->
+                                    <div>
+                                        <button mat-icon-button [matMenuTriggerFor]="menu"
+                                            aria-label="Example icon-button with a menu">
+                                            <mat-icon>more_vert</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <ng-container *ngIf="me.role.type == 'authenticated'">
+                                                <a mat-menu-item [routerLink]="['/admin/brief-plan', product.id]"
+                                                    routerLinkActive="router-link-active">
+                                                    <mat-icon svgIcon="heroicons_solid:eye"></mat-icon>
+                                                    <span>View Details</span>
+                                                </a>
+                                            </ng-container>
+
+                                            <ng-container *ngIf="me.role.type == 'marketing'">
+                                                <button mat-menu-item (click)="openNewOrder(product.id)"
+                                                    *ngIf="product.attributes.status == 'approved'">
+                                                    <mat-icon svgIcon="heroicons_solid:shopping-cart"></mat-icon>
+                                                    <span>Order</span>
+                                                </button>
+                                                <button mat-menu-item (click)="callDetail(product.id)">
+                                                    <mat-icon svgIcon="heroicons_solid:eye"></mat-icon>
+                                                    <span>View Details</span>
+                                                </button>
+                                                <button mat-menu-item (click)="editBrief(product.id)"
+                                                    *ngIf="product.attributes.status === 'brief' || product.attributes.status === 'draft'">
+                                                    <mat-icon svgIcon="heroicons_solid:pencil-alt"></mat-icon>
+                                                    <span>Edit</span>
+                                                </button>
+                                            </ng-container>
+                                            <ng-container *ngIf="me.role.type == '2nd_approve'">
+                                                <a mat-menu-item [routerLink]="['/nd/brief-plan', product.id]"
+                                                    routerLinkActive="router-link-active">
+                                                    <mat-icon svgIcon="heroicons_solid:eye"></mat-icon>
+                                                    <span>View Details</span>
+                                                </a>
+                                            </ng-container>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                                <ng-container *ngIf="selectedProduct != null">
+                                    <ng-container *ngIf="selectedProduct?.id === product.id">
+                                        <ng-container
+                                            *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: product}">
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+
+                    <mat-paginator
+                        class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
+                        [ngClass]="{'pointer-events-none': isLoading}" [length]="pagination.length"
+                        [pageIndex]="pagination.page" [pageSize]="pagination.size" [pageSizeOptions]="[5, 10, 25, 100]"
+                        [showFirstLastButtons]="true"></mat-paginator>
+
+                </ng-container>
+            </ng-container>
+
+            <ng-template #rowDetailsTemplate let-product>
+                <!-- Header -->
+                <div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary"
+                    matSort matSortDisableClear>
+                    <div>
+                    </div>
+                    <div>
+                    </div>
+                    <div [mat-sort-header]="'season'">Season</div>
+                    <div class="hidden sm:block" [mat-sort-header]="'code'">
+                        Code
+                    </div>
+                    <div class="hidden lg:block" [mat-sort-header]="'division.name'">
+                        Div / Campaign
+                    </div>
+
+                    <div class="hidden lg:block" [mat-sort-header]="'name'">
+                        Name
+                    </div>
+
+                    <div class="hidden lg:block" [mat-sort-header]="'store_type.name'">
+                        Store Type
+                    </div>
+
+                    <div class="hidden sm:block"></div>
+
+                </div>
+
+                <ng-container *ngIf="selectedProduct != null">
+                    <ng-container *ngFor="let asset of selectedProduct.attributes.assets.data; let i = index">
+                        <div class="inventory-grid grid bg-select items-center gap-4 py-3 px-6 md:px-8 border-b">
+                            <!-- no -->
+                            <div>
+                            </div>
+
+                            <!-- Image -->
+                            <div class="flex items-center">
+                                <div
+                                    class="relative flex flex-0 items-center justify-center w-12 h-12 mr-6 rounded overflow-hidden border">
+                                    <ng-container *ngIf="asset.attributes.asset_artworks.data.length > 0">
+                                        <ng-container
+                                            *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data">
+
+                                            <ng-container
+                                                *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.jpg' || asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.jpeg' || asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.png' || asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.gif' || asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.webp'; else noImageFiles">
+                                                <img (click)="showPicture(env_path+asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.url.substring(1))"
+                                                    class="w-full h-full object-cover" [alt]="'Product thumbnail image'"
+                                                    [src]="env_path+asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.url.substring(1)">
+                                            </ng-container>
+                                            <ng-template #noImageFiles>
+                                                <div class="w-auto pr-2 border p-1">
+                                                    <div class="flex items-center">
+                                                        <div
+                                                            class="flex items-center justify-center w-14 h-14 rounded dark:text-red-50">
+                                                            <div class="relative">
+                                                                <a target="_blank"
+                                                                    href="{{env_path+asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.url.substring(1)}}"
+                                                                    download="">
+                                                                    <mat-icon class="icon-size-10 text-current"
+                                                                        [svgIcon]="'iconsmind:file'">
+                                                                    </mat-icon>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.jpg'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-red-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.png'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-red-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.pdf'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-red-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.xlsx'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-green-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.xls'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-green-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.docx'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-blue-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                    <div *ngIf="asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext === '.pptx'"
+                                                                        class="absolute left-0 bottom-0 px-0.5 rounded text-sm font-semibold leading-5 text-white bg-red-600">
+                                                                        {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.ext
+                                                                        | uppercase}}
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="w-full ml-4 leading-none">
+                                                            <div class="mt-2 font-medium">
+                                                                <input type="text" class="w-20" disabled value="{{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.name}}">
+                                                            </div>
+                                                            <div class="text-sm mt-1 font-medium text-secondary">
+                                                                Size : {{asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.size}}
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="flex items-end justify-end w-full mr-1">
+                                                            <mat-icon class="text-green-600 icon-size-4 ml-1" [svgIcon]="'heroicons_solid:arrow-narrow-down'">
+                                                            </mat-icon>
+                                                            <div class="text-small leading-none">
+                                                                <a target="_blank" href="{{env_path+asset.attributes.asset_artworks.data[0].attributes.artwork_file.data.attributes.url.substring(1)}}" download="">Download</a>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </ng-container>
+                                    </ng-container>
+
+                                    <div class="flex items-center justify-center w-full h-full text-xs font-semibold leading-none text-center uppercase"
+                                        *ngIf="asset.attributes.asset_artworks.data.length == 0">
+                                        NO THUMB
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- season -->
+                            <div>
+                                {{asset.attributes.season}}
+                            </div>
+
+                            <!-- code -->
+                            <div class="hidden sm:block">
+                                {{asset.attributes.asset_code}}
+                            </div>
+
+                            <!-- division -->
+                            <div class="hidden sm:block">
+                                {{ asset.attributes.division.data?.attributes.code }}
+                            </div>
+
+                            <!-- name -->
+                            <div class="hidden sm:block">
+                                {{ asset.attributes.name }}
+                            </div>
+
+                            <!-- store type -->
+                            <div class="hidden sm:block">
+                                {{ asset.attributes.store_type.data?.attributes?.name }}
+                            </div>
+
+                            <!-- status -->
+                            <div></div>
+                            <div></div>
+                            <div>
+
+                            </div>
+
+                            <!-- Details button -->
+                            <div>
+
+                            </div>
+                        </div>
+
+                    </ng-container>
+                </ng-container>
+            </ng-template>
+
+            <ng-template #noProducts>
+                <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">There are no items!
+                </div>
+            </ng-template>
+
+        </div>
+
+    </div>
+
+</div>

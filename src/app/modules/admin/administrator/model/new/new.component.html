@@ -1,0 +1,186 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    สร้างรายการใหม่
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+
+            <div class="flex flex-col sm:flex-row">
+
+                <div class="flex flex-auto flex-wrap">
+                    <div class="flex flex-col w-full lg:w-4/4 p-3">
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>หมวดหมู่โมเดล
+                                    </mat-label>
+                                    <mat-select [formControlName]="'instructor_id'">
+                                        <mat-option [value]="''">
+                                            <span>เลือกหมวดหมู่โมเดล</span>
+                                        </mat-option>
+                                        <mat-option *ngFor="let item of instructorsData" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>สีรถ
+                                    </mat-label>
+                                    <mat-select [formControlName]="'course_category_id'">
+                                        <mat-option [value]="''">
+                                            <span>เลือกสีรถ</span>
+                                        </mat-option>
+                                        <mat-option *ngFor="let item of courseData" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>ล้อแม็ก
+                                    </mat-label>
+                                    <mat-select [formControlName]="'course_category_id'">
+                                        <mat-option [value]="''">
+                                            <span>เลือกล้อแม็ก</span>
+                                        </mat-option>
+                                        <mat-option *ngFor="let item of courseData" [value]="item.id">
+                                            {{item.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!-- Name, SKU & etc. -->
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>ชื่อ
+                                    </mat-label>
+                                    <input matInput [formControlName]="'name'">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>ระยะเวลาที่ใช้ในการฝึกอบรม
+                                    </mat-label>
+                                    <input matInput [formControlName]="'time'">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>จำนวนผู้เข้าอบรมที่เหมาะสม
+                                    </mat-label>
+                                    <input matInput [formControlName]="'qty'">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <div class="editor">
+                                <mat-label class="font-bold">หลักการและเหตุผล</mat-label>
+
+                                <ngx-editor-menu [editor]="editor1" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor1" formControlName="description">
+                                </ngx-editor>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <div class="editor">
+                                <mat-label class="font-bold">วัตถุประสงค์</mat-label>
+
+                                <ngx-editor-menu [editor]="editor2" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor2" formControlName="objective">
+                                </ngx-editor>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <div class="editor">
+                                <mat-label class="font-bold">เงื่อนไขและความต้องการ</mat-label>
+
+                                <ngx-editor-menu [editor]="editor3" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor3" formControlName="requirements">
+                                </ngx-editor>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <div class="editor">
+                                <mat-label class="font-bold">อื่นๆ</mat-label>
+
+                                <ngx-editor-menu [editor]="editor4" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor4" formControlName="more_detail">
+                                </ngx-editor>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col w-full lg:w-4/4 p-3">
+                            <!--firstname and lastname-->
+                            <div class="flex">
+                                <mat-form-field class="w-full">
+                                    <mat-label>Youtube
+                                    </mat-label>
+                                    <input matInput [formControlName]="'youtube'">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="model/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="create()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

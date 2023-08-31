@@ -1,0 +1,431 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขคอร์สอบรม
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
+                <mat-tab label="ข้อมูลคอร์ส">
+                    <div class="flex flex-auto flex-wrap">
+                        <div class="flex flex-col w-full lg:w-3/4 p-3">
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>วิทยากรอบรม
+                                        </mat-label>
+                                        <mat-select [formControlName]="'instructor_id'">
+                                            <mat-option [value]="''">
+                                                <span>เลือกวิทยากรอบรม</span>
+                                            </mat-option>
+                                            <mat-option *ngFor="let item of instructorsData" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>หมวดหมู่คอร์ส
+                                        </mat-label>
+                                        <mat-select [formControlName]="'course_category_id'">
+                                            <mat-option [value]="''">
+                                                <span>เลือกหมวดหมู่คอร์ส</span>
+                                            </mat-option>
+                                            <mat-option *ngFor="let item of courseData" [value]="item.id">
+                                                {{item.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <!-- Name, SKU & etc. -->
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>ชื่อคอร์ส
+                                        </mat-label>
+                                        <input matInput [formControlName]="'name'">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>ระยะเวลาที่ใช้ในการฝึกอบรม
+                                        </mat-label>
+                                        <input matInput [formControlName]="'time'">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>จำนวนผู้เข้าอบรมที่เหมาะสม
+                                        </mat-label>
+                                        <input matInput [formControlName]="'qty'">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <div class="editor">
+                                    <mat-label class="font-bold">หลักการและเหตุผล</mat-label>
+
+                                    <ngx-editor-menu [editor]="editor1" [toolbar]="toolbar">
+                                    </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor1" formControlName="description">
+                                    </ngx-editor>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <div class="editor">
+                                    <mat-label class="font-bold">วัตถุประสงค์</mat-label>
+
+                                    <ngx-editor-menu [editor]="editor2" [toolbar]="toolbar">
+                                    </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor2" formControlName="objective">
+                                    </ngx-editor>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <div class="editor">
+                                    <mat-label class="font-bold">เงื่อนไขและความต้องการ</mat-label>
+
+                                    <ngx-editor-menu [editor]="editor3" [toolbar]="toolbar">
+                                    </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor3" formControlName="requirements">
+                                    </ngx-editor>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <div class="editor">
+                                    <mat-label class="font-bold">อื่นๆ</mat-label>
+
+                                    <ngx-editor-menu [editor]="editor4" [toolbar]="toolbar">
+                                    </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor4" formControlName="more_detail">
+                                    </ngx-editor>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <!--firstname and lastname-->
+                                <div class="flex">
+                                    <mat-form-field class="w-full">
+                                        <mat-label>Youtube
+                                        </mat-label>
+                                        <input matInput [formControlName]="'youtube'">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="flex flex-col w-full lg:w-1/4 p-3">
+                            <div class="border-t border-gray-200">
+                                <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <div class=" flex flex-wrap justify-start">
+                                        <ngx-dropzone style="width: 100%; height: 120px; justify-content: center;" (change)="onSelect($event)">
+                                            <ngx-dropzone-label>รูปปก</ngx-dropzone-label>
+                                            <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                            </ngx-dropzone-image-preview>
+                                        </ngx-dropzone>
+                                    </div>
+                                </dd>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                        <div class="flex items-center justify-end">
+                            <a class="ml-4" mat-flat-button href="course/list">
+                                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                ยกเลิก
+                            </a>
+                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()">
+                                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                ยืนยัน
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="ไฟล์เอกสาร">
+                    <div class="flex">
+                        <div class="flex flex-col w-full lg:w-2/4 p-3">
+                            <div class="flex flex-col sm:flex-row">
+
+                                <div class="flex flex-auto flex-wrap">
+
+                                    <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                        <div class="flex w-full">
+                                            <mat-toolbar *ngIf="currentFile" class="progress-bar">
+                                                <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
+                                                <span class="progress">{{ progress }}%</span>
+                                            </mat-toolbar>
+                                        </div>
+                                        <div class="flex">
+                                            <mat-form-field>
+                                                <div>
+                                                    <mat-toolbar>
+                                                        <input matInput [value]="fileName" />
+
+                                                        <button mat-flat-button color="primary" [disabled]="!currentFile" (click)="upload()">
+                                                            อัพโหลดไฟล์
+                                                        </button>
+                                                    </mat-toolbar>
+
+                                                    <input type="file" id="fileInput" (change)="selectFile($event)" name="fileInput" />
+                                                </div>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Items list -->
+                            <div class="p-6 md:p-8 space-y-8">
+                                <!-- Folders -->
+                                <div>
+                                    <div class="font-medium">ไฟล์ที่อัพโหลดแล้ว</div>
+                                    <div class="flex flex-wrap -m-2 mt-2">
+                                        <ng-container *ngFor="let file of fileUploads; let i = index">
+                                            <div class="flex flex-wrap -m-2 mt-2">
+                                                <div class="relative w-40 h-40 m-2 p-4 shadow rounded-2xl bg-card">
+                                                    <a class="absolute z-20 top-1.5 right-1.5 w-8 h-8 min-h-8" (click)="removeFile(i)" mat-icon-button>
+                                                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                                    </a>
+                                                    <a class="z-10 absolute inset-0 flex flex-col p-4 cursor-pointer" [routerLink]="['/apps/file-manager/folders/', 1]">
+                                                        <div class="aspect-w-9 aspect-h-6">
+                                                            <div class="flex items-center justify-center">
+                                                                <!-- Icons -->
+                                                                <div class="relative">
+                                                                    <mat-icon class="icon-size-14 text-hint" [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                                    <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white" [class.bg-red-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'PDF'" [class.bg-blue-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'DOC'"
+                                                                        [class.bg-blue-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'DOCX'" [class.bg-green-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'XLS'" [class.bg-gray-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'TXT'"
+                                                                        [class.bg-amber-600]="file.substring(file.lastIndexOf('.')+1).toUpperCase() === 'JPG'">
+                                                                        {{file.substring(file.lastIndexOf('.')+1).toUpperCase()}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                            <div class="truncate" [matTooltip]="file">{{file}}</div>
+
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex flex-auto w-full lg:w-2/4 p-3">
+                            <div class="flex flex-wrap -m-2 mt-2">
+                                <ng-container *ngFor="let file of this.itemData.files">
+                                    <div class="relative w-40 h-40 m-2 p-4 shadow rounded-2xl bg-card">
+                                        <a class="absolute z-20 top-1.5 right-1.5 w-8 h-8 min-h-8" (click)="removeFileAdd(file.id)" mat-icon-button>
+                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                        </a>
+                                        <a class="z-10 absolute inset-0 flex flex-col p-4 cursor-pointer" href="{{file.path}}" target="_blank">
+                                            <div class="aspect-w-9 aspect-h-6">
+                                                <div class="flex items-center justify-center">
+                                                    <!-- Icons -->
+                                                    <div class="relative">
+                                                        <mat-icon class="icon-size-14 text-hint" [svgIcon]="'iconsmind:file'"></mat-icon>
+                                                        <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white" [class.bg-red-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'PDF'" [class.bg-blue-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'DOC'"
+                                                            [class.bg-blue-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'DOCX'" [class.bg-green-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'XLS'" [class.bg-gray-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'TXT'"
+                                                            [class.bg-amber-600]="file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase() === 'JPG'">
+                                                            {{file.path.substring(file.path.lastIndexOf('.')+1).toUpperCase()}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                <div class="truncate" [matTooltip]="file.path">{{file.path}}</div>
+
+                                            </div>
+                                        </a>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                        <div class="flex items-center justify-end">
+                            <a class="ml-4" mat-flat-button href="course/list">
+                                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                ยกเลิก
+                            </a>
+                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update4()">
+                                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                ยืนยัน
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="บทเรียน">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex flex-auto flex-wrap">
+
+                            <!-- Name, SKU & etc. -->
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <table formArrayName="curriculums" style="cursor: pointer" class="table datatable row-border hover" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;width:5%;">ลำดับ</th>
+                                            <th style="text-align: left;">บทเรียน</th>
+                                            <th style="text-align: left; width:15%;">ระยะเวลา</th>
+                                            <th style="text-align: right;width:5%;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let row of curriculums().controls; let i = index" [formGroupName]="i">
+                                            <!-- <th scope="row">{{ i + 1 }}</th> -->
+                                            <td style="text-align: center;">
+                                                {{i+1}}
+                                            </td>
+                                            <td style="text-align: center">
+                                                <mat-form-field class="w-full">
+                                                    <input matInput [formControlName]="'name'">
+                                                </mat-form-field>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <mat-form-field class="w-full">
+                                                    <input matInput [formControlName]="'time'">
+                                                </mat-form-field>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <button class="ml-3" (click)="deleteModel(row.value.id)">
+                                                    <mat-icon class="icon-size-5"
+                                                        [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3" class="text-right">
+                                                <button class="px-6 ml-3 mat-primary p-5" mat-flat-button (click)="add_curriculums()">
+                                                    <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                        <div class="flex items-center justify-end">
+                            <a class="ml-4" mat-flat-button href="course/list">
+                                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                ยกเลิก
+                            </a>
+                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update2()">
+                                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                ยืนยัน
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="รีวิว">
+                    <div class="flex flex-col sm:flex-row">
+                        <div class="flex flex-auto flex-wrap">
+
+                            <div class="flex flex-col w-full lg:w-4/4 p-3">
+                                <table formArrayName="reviews" style="cursor: pointer" class="table datatable row-border hover" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;width:5%;">ลำดับ</th>
+                                            <th style="text-align: left;">ชื่อผู้รีวิว</th>
+                                            <th style="text-align: right;width:5%;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <ng-container *ngFor="let row of reviews().controls; let i = index" [formGroupName]="i">
+                                            <tr>
+                                                <td style="text-align: center;">
+                                                    {{i+1}}
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <mat-form-field class="w-full">
+                                                        <input matInput [formControlName]="'name'">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td style="text-align: right;">
+                                                    <button class="ml-3" (click)="remove_reviews(row.value.id,i)">
+                                                        <mat-icon class="icon-size-5"
+                                                            [svgIcon]="'heroicons_solid:trash'"></mat-icon>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;">
+
+                                                </td>
+                                                <td style="text-align: center">
+                                                    <mat-form-field class="w-full">
+                                                        <textarea matInput rows="4" [formControlName]="'description'" placeholder="กรุณาระบุรายละเอียด"></textarea>
+                                                    </mat-form-field>
+                                                </td>
+                                                <td style="text-align: right;">
+
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+
+                                        <tr>
+                                            <th colspan="3" class="text-right">
+                                                <button class="px-6 ml-3 mat-primary p-5" mat-flat-button (click)="add_reviews()">
+                                                    <mat-icon svgIcon="heroicons_solid:plus"></mat-icon>
+                                                </button>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                        <div class="flex items-center justify-end">
+                            <a class="ml-4" mat-flat-button href="course/list">
+                                <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                                ยกเลิก
+                            </a>
+                            <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update3()">
+                                <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                ยืนยัน
+                            </button>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </form>
+    </div>
+
+</div>

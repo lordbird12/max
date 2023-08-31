@@ -1,0 +1,149 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <!-- <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div> -->
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">แก้ไขโปรไฟล์</div>
+        <!-- Actions -->
+        <!-- <a href="user/edit-profile" class="ml-4" mat-flat-button [color]="'primary'">
+            <mat-icon>edit</mat-icon>
+            <span class="ml-2 mr-1">แก้ไขโปรไฟล์</span>
+        </a> -->
+
+    </div>
+
+    <form [formGroup]="formData">
+        <div class="container">
+            <div class="card1">
+                <!-- <img  [src]="url"
+                > -->
+                <!-- <div class="flex justify-center items-center w-3/12"> -->
+                <!-- <mat-label> รูปโปรไฟล์</mat-label>
+                -->
+                <label>
+                    <mat-icon>add_a_photo</mat-icon>
+                    <mat-label> รูปโปรไฟล์</mat-label>
+                    <input (change)='onChange($event)' type="file" id="file" style="cursor: pointer;">
+                    <img class="img" [src]="url_pro" style="cursor: pointer;">
+                    <!-- <input type="file" id="file"> -->
+                </label>
+                <BR>
+                <label>
+           
+                    <mat-icon> border_color</mat-icon>
+                    <mat-label> ลายเซ็น</mat-label>
+           
+                    <input (change)='onChangeSignature($event)' type="file" id="file">
+                    <img class="img" [src]="url_sig" style="cursor: pointer;">
+
+                    <BR>
+                    <BR>
+                </label>
+            </div>
+            <div class="card2">
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        รหัสพนักงาน
+                    </div>
+
+                    <!-- <input matInput placeholder="รหัสพนักงาน" [formControlName]="'user_id'">
+                    <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                    </mat-form-field>
+                -->
+                    <mat-label> {{ this.dataRow.user_id}}</mat-label>
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        ชื่อ
+                    </div>
+                    <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                        <input matInput placeholder="ชื่อ" [formControlName]="'first_name'">
+                    </mat-form-field>
+                    <!-- <mat-label> บอส</mat-label> -->
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        นามสกุล
+                    </div>
+                    <!-- <mat-label> มักแล่ว</mat-label> -->
+                    <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                        <input matInput placeholder="นามสกุล" [formControlName]="'last_name'">
+                    </mat-form-field>
+
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        อีเมลล์
+                    </div>
+                    <!-- <mat-label> bossadasd@gmail.com</mat-label> -->
+                    <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                        <input matInput placeholder="อีเมลล์" [formControlName]="'email'">
+                    </mat-form-field>
+
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        สาขา
+                    </div>
+                    <mat-label> {{ this.Bra}}</mat-label>
+
+                    <!-- <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                    <input matInput placeholder="นามสกุล" [formControlName]="'branch_id'">
+                </mat-form-field> -->
+
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        แผนก
+                    </div>
+                    <mat-label> {{ this.Dep}} </mat-label>
+                    <!-- <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                    <input matInput placeholder="นามสกุล" [formControlName]="'department_id'">
+                </mat-form-field> -->
+
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        ตำแหน่ง
+                    </div>
+                    <mat-label> {{ this.Pos}} </mat-label>
+                    <!-- <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                    <input matInput placeholder="นามสกุล" [formControlName]="'position_id'">
+                </mat-form-field> -->
+
+                </div>
+                <div class="flex">
+                    <div class="flex-none h-12 w-32">
+                        สิทธิ์
+                    </div>
+                    <mat-label> Admin </mat-label>
+                    <!-- <mat-form-field class="w-3/12 pr-2 flex-initial w-full">
+                    <input matInput placeholder="นามสกุล" [formControlName]="'permission_id'">
+                </mat-form-field> -->
+
+                </div>
+                <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                    <div class="flex items-center justify-end">
+                        <a class="ml-4" mat-flat-button href="user/list">
+                            <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                            ยกเลิก
+                        </a>
+                        <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="updateProfile()">
+                            <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                            ยืนยัน
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+    <!-- <div> {{this.url_pro | json}}</div> -->
+</div>

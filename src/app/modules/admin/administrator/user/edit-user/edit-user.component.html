@@ -1,0 +1,128 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขผู้ใช้งาน
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <div class="flex flex-col sm:flex-row p-8">
+
+                <!-- Product images and status -->
+                <!-- <div class="flex flex-col items-center sm:items-start mb-8 sm:mb-0">
+                    <div class="flex flex-col items-center">
+                        <h2>Info</h2>
+                    </div>
+    
+                </div> -->
+
+                <div class="flex flex-auto flex-wrap">
+
+                    <!-- Name, SKU & etc. -->
+                    <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                        <!--firstname and lastname-->
+                        <div class="flex p-5">
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>ชื่อผู้ใช้งาน
+                                </mat-label>
+                                <input matInput [formControlName]="'user_id'">
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>Email</mat-label>
+                                <input matInput [formControlName]="'email'">
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>กำหนดสิทธิ์</mat-label>
+                                <mat-select [formControlName]="'permission_id'">
+                                    <mat-option *ngFor="let per of permissionData" [value]="per.id">
+                                        {{per.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>Line Token
+                                </mat-label>
+                                <input matInput [formControlName]="'line_token'">
+                            </mat-form-field>
+                        </div>
+                        <!--firstname and lastname-->
+                        <div class="flex p-5">
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>ชื่อพนักงาน</mat-label>
+                                <input matInput [formControlName]="'name'">
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>ฝ่าย</mat-label>
+                                <mat-select [formControlName]="'department_id'">
+                                    <mat-option *ngFor="let role of departmentData" [value]="role.id">
+                                        {{role.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>ตำแหน่ง</mat-label>
+                                <mat-select [formControlName]="'position_id'">
+                                    <mat-option *ngFor="let role of positionData" [value]="role.id">
+                                        {{role.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field class="w-3/12 pr-2">
+                                <mat-label>เบอร์ติดต่อ</mat-label>
+                                <input matInput [formControlName]="'phone'">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex p-5">
+
+                        </div>
+                        <!-- Division and Lanching -->
+
+
+                        <div class="flex p-5">
+                            <div class="flex justify-center items-center w-3/12">
+                                <!-- <ngx-dropzone style="width: 300px; height: 300px;" (change)="onSelect($event)">
+                                    <ngx-dropzone-label>เลือกรูป โปรไฟล์ </ngx-dropzone-label>
+                                    <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f"
+                                        (removed)="onRemove(f)">
+                                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone> -->
+                                <label>
+                                    <mat-label> รูปโปรไฟล์</mat-label>
+                                    <input (change)='onChange($event)' type="file" id="file" style="cursor: pointer;">
+                                    <img class="img" [src]="url_pro">
+                                    <!-- <input type="file" id="file"> -->
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="user/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ยกเลิก
+                </a>
+                <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="UpdateUser()">
+                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                    ยืนยัน
+                </button>
+            </div>
+        </div>
+        <pre>
+        </pre>
+    </div>
+</div>

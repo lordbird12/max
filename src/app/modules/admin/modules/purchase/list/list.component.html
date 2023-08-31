@@ -1,0 +1,294 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการจัดซื้อ</div>
+        <!-- Actions -->
+        <div class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            <!-- Add product button -->
+            <a routerLink="../../purchase/new" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">เพิ่มใหม่</span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- search -->
+    <!-- <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
+
+    </div> -->
+
+
+    <!-- Main -->
+    <div class="flex flex-auto overflow-hidden">
+        <!-- Products list -->
+        <div class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto">
+            <mat-tab-group class="sm:px-2" [animationDuration]="'0'">
+
+                <!-- grid -->
+                <mat-tab label="แสดงภาพรวม">
+                    <ng-template matTabContent>
+                        <!-- Products list -->
+                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8 mb-5 text-center">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                                <!-- Summary -->
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">สรุปงานของคุณ
+                                        </div>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                            </button>
+                                            <mat-menu #summaryMenu="matMenu">
+                                                <button mat-menu-item>เมื่อวาน</button>
+                                                <button mat-menu-item>2 วันก่อน</button>
+                                                <button mat-menu-item>3 วันก่อน</button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-2">
+                                        <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">
+                                            21</div>
+                                        <div class="text-lg font-medium text-blue-600 dark:text-blue-500">งาน</div>
+                                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                            <div class="text-md font-medium truncate">สำเร็จ:</div>
+                                            <div class="ml-1.5 text-lg font-semibold">5</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Overdue -->
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">งานค้าง</div>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="overdueMenu">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                            </button>
+                                            <mat-menu #overdueMenu="matMenu">
+                                                <button mat-menu-item>เมื่อวาน</button>
+                                                <button mat-menu-item>2 วันก่อน</button>
+                                                <button mat-menu-item>3 วันก่อน</button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-2">
+                                        <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-red-500">
+                                            17</div>
+                                        <div class="text-lg font-medium text-red-600 dark:text-red-500">งาน</div>
+                                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                            <div class="text-md font-medium truncate">จากเมื่อวาน :</div>
+                                            <div class="ml-1.5 text-lg font-semibold">2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Issues -->
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">งานวันนี้
+                                        </div>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="issuesMenu">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                            </button>
+                                            <mat-menu #issuesMenu="matMenu">
+                                                <button mat-menu-item>เมื่อวาน</button>
+                                                <button mat-menu-item>2 วันก่อน</button>
+                                                <button mat-menu-item>3 วันก่อน</button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-2">
+                                        <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">
+                                            24</div>
+                                        <div class="text-lg font-medium text-amber-600 dark:text-amber-500">งาน</div>
+                                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                            <div class="text-md font-medium truncate">ปิดวันนี้ :</div>
+                                            <div class="ml-1.5 text-lg font-semibold">7</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Features -->
+                                <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">งานร่าง</div>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="featuresMenu">
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                                            </button>
+                                            <mat-menu #featuresMenu="matMenu">
+                                                <button mat-menu-item>เมื่อวาน</button>
+                                                <button mat-menu-item>2 วันก่อน</button>
+                                                <button mat-menu-item>3 วันก่อน</button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col items-center mt-2">
+                                        <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">
+                                            24</div>
+                                        <div class="text-lg font-medium text-green-600 dark:text-green-500">งาน</div>
+                                        <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                                            <div class="text-md font-medium truncate">รอดำเนินการ:</div>
+                                            <div class="ml-1.5 text-lg font-semibold">2</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Github issues summary -->
+                                <div class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex flex-col sm:flex-row items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                                            สรุปผลการดำเนินงานทั้งปี</div>
+                                        <div class="mt-3 sm:mt-0 sm:ml-2">
+                                            <mat-button-toggle-group value="this-week" #githubIssuesWeekSelector="matButtonToggleGroup">
+                                                <mat-button-toggle value="last-week">สัปดาห์ก่อน</mat-button-toggle>
+                                                <mat-button-toggle value="this-week">สัปดาห์นี้</mat-button-toggle>
+                                            </mat-button-toggle-group>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 grid-flow-row gap-6 w-full mt-8 sm:mt-4">
+                                        <!-- New vs. Closed -->
+                                        <div class="flex flex-col flex-auto">
+                                            <div class="font-medium text-secondary">งานทั้งหมด</div>
+                                            <div class="flex flex-col flex-auto">
+                                                <apx-chart class="flex-auto w-full h-80" [chart]="chartGithubIssues.chart" [colors]="chartGithubIssues.colors" [dataLabels]="chartGithubIssues.dataLabels" [grid]="chartGithubIssues.grid" [labels]="chartGithubIssues.labels" [legend]="chartGithubIssues.legend"
+                                                    [plotOptions]="chartGithubIssues.plotOptions" [series]="chartGithubIssues.series[githubIssuesWeekSelector.value]" [states]="chartGithubIssues.states" [stroke]="chartGithubIssues.stroke" [tooltip]="chartGithubIssues.tooltip"
+                                                    [xaxis]="chartGithubIssues.xaxis" [yaxis]="chartGithubIssues.yaxis">
+                                                </apx-chart>
+                                            </div>
+                                        </div>
+                                        <!-- Overview -->
+                                        <div class="flex flex-col">
+                                            <div class="font-medium text-secondary">ภาพรวม</div>
+                                            <div class="flex-auto grid grid-cols-4 gap-4 mt-6">
+                                                <!-- New issues -->
+                                                <div class="col-span-2 flex flex-col items-center justify-center py-8 px-1 rounded-2xl bg-indigo-50 text-indigo-800 dark:bg-white dark:bg-opacity-5 dark:text-indigo-400">
+                                                    <div class="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
+                                                        {{data.githubIssues.overview[githubIssuesWeekSelector.value]['new-issues']}}
+                                                    </div>
+                                                    <div class="mt-1 text-sm sm:text-lg font-medium">งานสำเร็จในปีนี้
+                                                    </div>
+                                                </div>
+                                                <!-- Closed -->
+                                                <div class="col-span-2 flex flex-col items-center justify-center py-8 px-1 rounded-2xl bg-green-50 text-green-800 dark:bg-white dark:bg-opacity-5 dark:text-green-500">
+                                                    <div class="text-5xl sm:text-7xl font-semibold leading-none tracking-tight">
+                                                        {{data.githubIssues.overview[githubIssuesWeekSelector.value]['closed-issues']}}
+                                                    </div>
+                                                    <div class="mt-1 text-sm sm:text-lg font-medium">งานไม่สำเร็จในปีนี้
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Schedule -->
+                                <div class="sm:col-span-4 md:col-span-4 lg:col-span-4 flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                                    <div class="flex flex-col sm:flex-row items-start justify-between">
+                                        <div class="text-lg font-medium tracking-tight leading-6 truncate">
+                                            ความเคลื่อนไหวงาน</div>
+                                        <div class="mt-3 sm:mt-0 sm:ml-2">
+                                            <mat-button-toggle-group value="today" #scheduleDaySelector="matButtonToggleGroup">
+                                                <mat-button-toggle value="today">วันนี้</mat-button-toggle>
+                                                <mat-button-toggle value="tomorrow">พรุ้งนี้</mat-button-toggle>
+                                            </mat-button-toggle-group>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col mt-2 divide-y">
+                                        <div class="flex flex-row justify-between py-4 px-0.5">
+                                            <div class="flex flex-col">
+                                                <div class="font-medium text-left">จัดซื้อเกาอี้สำนักงาน 5 ตัว </div>
+                                                <div class="flex flex-col sm:flex-row sm:items-center -ml-0.5 mt-2 sm:mt-1 space-y-1 sm:space-y-0 sm:space-x-3">
+                                                    <div class="flex items-center">
+                                                        <mat-icon class="icon-size-5 text-hint" [svgIcon]="'heroicons_solid:clock'"></mat-icon>
+                                                        <div class="ml-1.5 text-md text-secondary">
+                                                            วันอังคาร เวลา 16:20 น.
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex items-center">
+                                                        <mat-icon class="icon-size-5 text-hint" [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                                                        <div class="ml-1.5 text-md text-secondary">
+                                                            กำลังจัดส่ง : 6/4 ปาก ซ.13 4 ถนน ลาดกระบัง ลาดกระบัง เขตลาดกระบัง
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button mat-icon-button>
+                                                <mat-icon [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </mat-tab>
+
+                <!-- table -->
+                <mat-tab label="แสดงแบบรายการ">
+                    <ng-template matTabContent>
+                        <!-- Products list -->
+                        <div class="flex flex-col flex-auto p-5 overflow-hidden sm:overflow-y-auto ">
+                            <table datatable [dtOptions]="dtOptions" class="table row-border hover">
+                                <thead>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชื่อสินค้า</th>
+                                        <th>จำนวน</th>
+                                        <th>รายละเอียด</th>
+                                        <th>ผู้สนใจ</th>
+                                        <th>สถานะ</th>
+                                        <th>สร้างโดย</th>
+                                        <th>วันที่สร้าง</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="dataRow?.length != 0">
+                                    <tr *ngFor="let item of dataRow; let i = index">
+                                        <td style="width: 5%;">{{ pages.begin + (i + 1) }}</td>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.qty }}</td>
+                                        <td>{{ item.description }}</td>
+                                        <td>{{ item.purchase_quotations.length }} คน</td>
+                                        <td>
+                                            <span class="bg-green-100 text-green-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900" *ngIf="item.status === 'Yes'"> อนุมัติแล้ว</span>
+                                            <span class="bg-red-100 text-red-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900" *ngIf="item.status === 'No'"> ไม่อนุมัติ</span>
+                                            <span class="bg-yellow-100 text-yellow-800 text-m font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900" *ngIf="item.status === 'Request'"> รอการอนุมัติ</span>
+                                        </td>
+                                        <td style="width: 5%;">{{ item.create_by }}</td>
+                                        <td>{{ item.created_at }}</td>
+                                        <td style="width: 15%;">
+                                            <button mat-button (click)="edit(item.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                            <button mat-button (click)="openDetail(item.id)">
+                                            <mat-icon>visibility</mat-icon>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="dataRow?.length == 0">
+                                    <tr>
+                                        <td colspan="9" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-template>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

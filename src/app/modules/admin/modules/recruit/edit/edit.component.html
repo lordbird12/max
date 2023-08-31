@@ -1,0 +1,91 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขรายการสรรหา
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <div class="flex flex-col sm:flex-row p-8">
+                <div class="w-full">
+                    <div class="flex flex-auto flex-wrap">
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">ชื่อตำแหน่งงาน</mat-label>
+                                <input matInput [formControlName]="'position'" placeholder="ชื่อตำแหน่งงาน">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">เงินเดือน</mat-label>
+                                <input matInput [formControlName]="'salary'" placeholder="เงินเดือน">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">ประสบการณ์ทำงาน</mat-label>
+                                <input matInput [formControlName]="'exp'" type="number" placeholder="ประสบการณ์ทำงาน">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">สาขาที่รับสมัคร</mat-label>
+                                <input matInput [formControlName]="'major'" placeholder="สาขาที่รับสมัคร">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">วุฒิการศึกษา</mat-label>
+                                <mat-select [formControlName]="'degree'">
+                                    <mat-option [value]="''">
+                                        <span class="text-gray-400">เลือกวุฒิการศึกษา</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let degree of degreeData" [value]="degree.name">
+                                        {{degree.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-2/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">จำนวนที่เปิดรับ</mat-label>
+                                <input matInput [formControlName]="'qty'" type="number" placeholder="จำนวนที่เปิดรับ">
+                            </mat-form-field>
+                        </div>
+                        <div class="flex flex-col w-full lg:w-4/4 sm:pl-8">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">รายละเอียดงาน</mat-label>
+                                <textarea matInput rows="4" [formControlName]="'description'" placeholder="รายละเอียดงาน"></textarea>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- button -->
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+                    <a class="ml-4" mat-flat-button href="recruit/list">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

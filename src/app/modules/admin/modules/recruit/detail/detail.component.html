@@ -1,0 +1,188 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate ">
+                    รายละเอียดงาน
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex">
+                <div class="w-full">
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ชื่อตำแหน่งงาน</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.position}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">รายละเอียดงาน</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.description}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">จำนวนเปิดรับ</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.qty}} คน
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ประสบการณ์</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.exp}} ปี
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">สาขาที่เปิดรับ</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.major}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">เงินเดือน</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.salary}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <form [formGroup]="formData">
+            <div class="overflow-x-auto relative">
+                <div class="flex">
+                    <div class="flex flex-col w-full lg:w-4/4">
+                        <mat-form-field class="w-full">
+                            <mat-label class="font-bold">ค้นหาข้อมูล</mat-label>
+                            <input matInput placeholder="ค้นหน้าข้อมูล" (keyup)="onFilter($event)" [formControlName]="'filter'">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="overflow-x-auto relative">
+            <div class="flex">
+                <div class="w-full">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 heroicons_solid row-border hover">
+                        <thead class="text-m text-gray-700 uppercase bg-gray-50 dark:bg-white-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 ">
+                                    ลำดับ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ชื่อผู้สนใจ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    เพศ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    อายุ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    สถานะภาพ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    เบอร์ติดต่อ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    อีเมล
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ข้อความ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    รูป
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ดูข้อมูล
+                                </th>
+                            </tr>
+                        </thead>
+                        <ng-container *ngIf="this.Data">
+                            <tbody *ngIf="this.Data.user_job_interestings?.length != 0">
+                                <tr *ngFor="let item of this.Data.user_job_interestings; let i = index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                    <td class="py-4 px-6">{{ i+1 }}</td>
+                                    <td class="py-4 px-6">{{item.user_job[0].name}}</td>
+
+                                    <td class="py-4 px-6">{{item.user_job[0].gender}}</td>
+
+                                    <td class="py-4 px-6">{{item.user_job[0].age}}</td>
+
+                                    <td class="py-4 px-6">{{item.user_job[0].marital}}</td>
+
+                                    <td class="py-4 px-6">{{item.user_job[0].phone}}</td>
+
+                                    <td class="py-4 px-6">{{item.user_job[0].email}}</td>
+
+                                    <td class="py-4 px-6">{{item.remark}}</td>
+
+                                    <td class="py-4 px-6">
+                                        <button mat-button (click)="showPicture(item.user_job[0].image)">
+                                            <mat-icon>image</mat-icon>
+                                        </button>
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <a routerLink="../../profile/{{item.user_job[0].id}}/{{this.Data.id}}" mat-icon-button>
+                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:eye'">
+                                            </mat-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="this.Data.bank_trans?.length == 0">
+                                <tr>
+                                    <td colspan="9">No Data</td>
+                                </tr>
+                            </tbody>
+                        </ng-container>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="recruit/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ย้อนกลับ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

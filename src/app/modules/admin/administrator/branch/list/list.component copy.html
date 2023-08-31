@@ -1,0 +1,116 @@
+<div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div
+        class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
+        <!-- Loader -->
+        <div class="absolute inset-x-0 bottom-0" *ngIf="isLoading">
+            <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+        </div>
+        <!-- Title -->
+        <div class="text-4xl font-extrabold tracking-tight">รายการสาขา</div>
+        <!-- Actions -->
+        <div *ngIf="roleType == 'marketing'" class="flex shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+
+            <!-- Add product button -->
+            <a href="branch/new-branch" class="ml-4" mat-flat-button [color]="'primary'">
+                <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                <span class="ml-2 mr-1">เพิ่มสาขาใหม่</span>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- search -->
+    <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
+        <div class="search-box relative flex flex-col flex-0 px-6 md:px-8 border-b mt-4">
+            <!-- <form [formGroup]="filterForm">
+            <div class="flex flex-auto">
+                <div class="flex flex-col w-1/6">
+                    <mat-form-field class="search-box w-full xs:ml-0">
+                        <mat-select [formControlName]="'asset_type'">
+                            <mat-option value="default">Asset Type</mat-option>
+                            <mat-option *ngFor="let asset_type of asset_types ; let i = index;" [value]="asset_type.id">
+                                {{asset_type.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex flex-col w-5/6">
+                    <mat-form-field class="w-full">
+                        <input matInput [formControlName]="'searchInputControl'" [autocomplete]="'off'"
+                            [placeholder]="'Search for Code , Name'">
+                        <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                    </mat-form-field>
+                </div>
+                <button mat-stroked-button class="w-fit" style="min-height: 48px;" (click)="resetForm()">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:refresh'"></mat-icon>
+                </button>
+            </div>
+        </form> -->
+        </div>
+
+        <!-- Main -->
+        <div class="flex flex-auto overflow-hidden">
+
+            <!-- Products list -->
+
+            <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+
+                <div class="mat-elevation-z8">
+                    <mat-table [dataSource]="dataSource" matSort>
+
+                        <!-- id Column -->
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> ลำดับ </mat-header-cell>
+                            <mat-cell *matCellDef="let row; let i = index"> {{ row.id }} </mat-cell>
+                        </ng-container>
+
+                        <!-- name Column -->
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสาขา </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+                        </ng-container>
+
+                        <!-- status Column -->
+                        <ng-container matColumnDef="status">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> สถานะ </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <div *ngIf="row.status === 1"> เปิดใช้งาน</div>
+                                <div *ngIf="row.status === 0"> ปิดใช้งาน</div>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- create_by Column -->
+                        <ng-container matColumnDef="create_by">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> สร้างโดย </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.create_by}} </mat-cell>
+                        </ng-container>
+                        <!-- created_at Column -->
+                        <ng-container matColumnDef="created_at">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> วันที่สร้าง </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.created_at}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef> จัดการ </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button mat-button (click)="edit(row.id)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;">
+                        </mat-row>
+                    </mat-table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>

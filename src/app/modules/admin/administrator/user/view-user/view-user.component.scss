@@ -1,0 +1,35 @@
+// .mat-ripple .mat-checkbox-ripple .mat-focus-indicator .mat-ripple-element .mat-checkbox-persistent-ripple {
+//     color: black;
+// }
+// .mat-checkbox-checked {
+//     color: rgb(46, 46, 245);
+// }
+
+//   ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+//     background-color: rgb(72, 72, 235) !important;
+//   }
+
+  [mat-dialog-title] {
+    margin: -24px -24px 0px -24px !important;
+    padding: 10px 24px;
+    background: #c59d52;
+    color: #fff;
+    cursor: grab;
+  }
+  
+  
+  .p-5
+  {
+    padding: 0rem !important;
+
+  }
+ .img {
+  display: flex;
+    align-items: center!important;
+    background: #fff!important;
+    color: #717386!important;
+    border: 2px dashed #717386!important;
+    border-radius: 5px!important;
+    font-size: 16px!important;
+    overflow-x: auto!important;
+}

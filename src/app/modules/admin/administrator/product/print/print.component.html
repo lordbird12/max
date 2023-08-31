@@ -1,0 +1,22 @@
+<div class="outer-border bg-center">
+    <div class="inner-dotted-border">
+        <span class="name" style="position: absolute; top:260px; left:150px;"><b>{{bankData.name}}</b></span>
+        <!-- <span class="certification">อนุโมทนาบัตร</span>
+        <br><br>
+        <span class="certify"><i>ขออนุโมทนา แด่</i></span>
+        <br><br>
+        <span class="name"><b>{{bankData.name}}</b></span><br/><br/>
+        <span class="certify"><i>ผู้บริจาคทรัพย์โดยมีวัตถุประสงค์เพื่อ ร่วมทำบุญ</i></span> <br/><br/>
+        <span class="certify"><i>วัด มงคลโคธาวาส ตำบล คองด่าน อำเภอ บางบ่อ จังหวัด สมุทรปราการ</i></span> <br/><br/>
+        <span class="certify"><i>เป็นจำนวนเงิน {{bankData.price | currency:" ":'symbol':'1.0'}} บาท</i></span> <br/><br/>
+        <span class="fs-20">ขออานุภาพคุณพระศรีรัตนตรัยและบุญกุศลที่บำเพ็ญนี้ จงประทานพรให้ท่านเจริญด้วย</span> <br/><br/>
+        <span class="fs-20">อายุ วรรณะ สุขะ พละ ปฏิภาณ ธรรมสารสมบัติ และประสบสิ่งอันพึงปราถนา ทุกทิพาราตรีกาล เทอญ ฯ</span> <br/><br/><br/><br/>
+        <span class="certify"><i>วันที่</i></span><br><br>
+
+        <span class="fs-30">24 เดือน ตุลาคม พ.ศ. 2565</span><br><br> -->
+        <button *ngIf="printshow" class="px-6 ml-3 mat-primary" mat-flat-button (click)="printMe()">
+            <mat-icon>print</mat-icon>
+            พิมพ์เอกสาร
+        </button>
+    </div>
+</div>

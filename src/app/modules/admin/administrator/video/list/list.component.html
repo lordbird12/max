@@ -1,0 +1,106 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    วีดีโอแนะนำและสถิติ
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col mt-3 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <div class="flex flex-col sm:flex-row p-8">
+
+
+                <div class="flex flex-auto flex-wrap">
+                    <div class="flex flex-col w-full lg:w-4/4 p-5">
+                        <fuse-alert [appearance]="'outline'" [type]="'info'">
+                            วิดีโอแนะนำตัวจะช่วยให้ลูกค้าได้รู้จักคุณเบื้องต้น นอกจากนั้นลูกค้าจะได้ทำความเข้าใจว่าสไตล์การเรียนของพวกเขาจะเข้ากับสไตล์การสอนของคุณหรือไม่ ช่วยให้คุณได้คัดกรองลูกค้าที่เหมาะสมกับการสอนของคุณได้มากยิ่งขึ้น
+
+                        </fuse-alert>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-4/4 mt-5 p-5 items-center">
+                        <div class="flex flex-wrap items-center -mx-1 ng-star-inserted">
+                            <youtube-player #player [videoId]="this.formData.value.youtube"></youtube-player>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-4/4 mt-5 p-5">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>
+                                    YouTube ID
+                                </mat-label>
+                                <input matInput [formControlName]="'youtube'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 mt-5 p-5">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>
+                                    จัดส่งเรียบร้อยแล้ว
+                                </mat-label>
+                                <input matInput [formControlName]="'state1'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-1/4 mt-5 p-5">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>
+                                    ลูกค้าพึงพอใจ
+                                </mat-label>
+                                <input matInput [formControlName]="'state2'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-1/4 mt-5 p-5">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>
+                                    ผู้ได้รับรางวัล
+                                </mat-label>
+                                <input matInput [formControlName]="'state3'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-full lg:w-1/4 mt-5 p-5">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>
+                                    สมาชิกในทีม
+                                </mat-label>
+                                <input matInput [formControlName]="'state4'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- button -->
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        บันทึก
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

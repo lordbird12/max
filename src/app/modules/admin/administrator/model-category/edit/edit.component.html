@@ -1,0 +1,581 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    แก้ไขโมเดล
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <form class="flex flex-col p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData">
+            <div class="flex flex-col sm:flex-row">
+                <div class="flex flex-auto flex-wrap">
+
+                    <!-- Name, SKU & etc. -->
+                    <div class="flex flex-col w-full lg:w-4/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">ชื่อ
+                                </mat-label>
+                                <input matInput [formControlName]="'name'">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <div class="flex flex-col w-full lg:w-4/4 p-3 border-b">
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 120px; justify-content: center;" (change)="onSelect($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                <div class="flex items-center justify-end">
+                    <a class="ml-4" mat-flat-button href="model_category/list">
+                        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                        ยกเลิก
+                    </a>
+                    <button class="px-6 ml-3 mat-primary" mat-flat-button (click)="update()">
+                        <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                        ยืนยัน
+                    </button>
+                </div>
+            </div>
+
+        </form>
+        <form class="flex flex-col p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData2">
+            <div class="flex flex-col sm:flex-row">
+                <div class="flex flex-auto flex-wrap">
+
+                    <!-- Name, SKU & etc. -->
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">1.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name1'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id1'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id1'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect21($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files21" [removable]="true" [file]="f" (removed)="onRemove21(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">2.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name2'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id2'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id2'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect22($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files22" [removable]="true" [file]="f" (removed)="onRemove22(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">3.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name3'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id3'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id3'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect23($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files23" [removable]="true" [file]="f" (removed)="onRemove23(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">4.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name4'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id4'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id4'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect24($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files24" [removable]="true" [file]="f" (removed)="onRemove24(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">5.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name5'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id5'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id5'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect25($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files25" [removable]="true" [file]="f" (removed)="onRemove25(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">6.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name6'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id6'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id6'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect26($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files26" [removable]="true" [file]="f" (removed)="onRemove26(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">7.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name7'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id7'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id7'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect27($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files27" [removable]="true" [file]="f" (removed)="onRemove27(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-1/4 p-3">
+                        <!--firstname and lastname-->
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label class="font-bold">8.ชื่อโมเดล
+                                </mat-label>
+                                <input matInput [formControlName]="'name8'" placeholder="ชื่อรายการ">
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>สีรถ
+                                </mat-label>
+                                <mat-select [formControlName]="'color_id8'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกสีรถ</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemColorData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                        <div class="flex">
+                            <mat-form-field class="w-full">
+                                <mat-label>ล้อแม็ก
+                                </mat-label>
+                                <mat-select [formControlName]="'maxe_id8'">
+                                    <mat-option [value]="''">
+                                        <span>เลือกล้อแม็ก</span>
+                                    </mat-option>
+                                    <mat-option *ngFor="let item of itemMaxeData" [value]="item.id">
+                                        {{item.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div class=" flex flex-wrap justify-start">
+                                    <ngx-dropzone style="width: 100%; height: 50px; justify-content: center;" (change)="onSelect28($event)">
+                                        <ngx-dropzone-label>รูปภาพ</ngx-dropzone-label>
+                                        <ngx-dropzone-image-preview *ngFor="let f of files28" [removable]="true" [file]="f" (removed)="onRemove28(f)">
+                                        </ngx-dropzone-image-preview>
+                                    </ngx-dropzone>
+                                </div>
+                            </dd>
+                        </div>
+
+                    </div>
+
+                    <div class="flex flex-col w-full lg:w-4/4 p-3">
+
+                        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+                            <div class="flex items-center justify-end">
+
+                                <button class="px-6 mat-primary" mat-flat-button (click)="save()">
+                                    <mat-icon svgIcon="heroicons_solid:check"></mat-icon>
+                                    เพิ่ม
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products list -->
+                    <div class="flex flex-col w-full lg:w-4/4 p-3">
+                        <div class="flex flex-col flex-auto overflow-hidden sm:overflow-y-auto">
+                            <table datatable [dtOptions]="dtOptions" class="table row-border hover" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>ลำดับ</th>
+                                        <th>ชื่อ</th>
+                                        <th>สร้างโดย</th>
+                                        <th>วันที่สร้าง</th>
+                                        <th>รูปปก</th>
+                                        <th>จัดการ</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="itemData.models?.length != 0">
+                                    <tr *ngFor="let item of itemData.models; let i = index">
+                                        <td align="center">{{ (i + 1) }}</td>
+                                        <td align="center" style="width:30%">{{ item.name }}</td>
+                                        <td align="center">Admin</td>
+                                        <td align="center">{{ item.created_at }}</td>
+                                        <td align="center">
+                                            <button mat-button (click)="showPicture(item.image)">
+                                                <mat-icon>image</mat-icon>
+                                            </button>
+                                        </td>
+                                        <td align="center">
+                                            <button mat-button (click)="edit(item)">
+                                                <mat-icon>edit</mat-icon>
+                                            </button>
+                                            <button mat-button (click)="delete2(item.id)">
+                                                <mat-icon svgIcon="heroicons_solid:trash"></mat-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="itemData.product_categorys?.length == 0">
+                                    <tr>
+                                        <td colspan="6" class="no-data-available text-center">ไม่มีข้อมูล !</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>

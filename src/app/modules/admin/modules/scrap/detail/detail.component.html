@@ -1,0 +1,184 @@
+<div class="flex flex-col flex-auto min-w-0 bg-card dark:bg-transparent">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate ">
+                    รายละเอียดของเสีย
+                </h2>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto p-3 sm:p-10">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div class="flex">
+                <div class="count-down-timer">
+                    <p>ระยะเวลาสิ้นสุดใบเสนอราคา <b style="color:#fff;">{{ currentTime }}</b></p>
+                    <div class="wrapper">
+                        <div class="description">
+                            <p>วัน</p>
+                            <p>ชั่วโมง</p>
+                            <p>นาที</p>
+                            <p>วินาที</p>
+                        </div>
+                        <div class="times">
+                            <p #days></p>
+                            <p #hours></p>
+                            <p #minutes></p>
+                            <p #seconds></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <div class="w-full">
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ชื่อสินค้า</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.name}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ความกว้าง</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    100
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">ความสูง</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    100
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">น้ำหนัก</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    140 กก.
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">จำนวน</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.qty}} กล่อง
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div class="border-t border-white-200">
+                        <dl>
+                            <div class="bg-white-50 px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt class="text-sm font-extrabold text-gray-500">รายละเอียด</dt>
+                                <dd *ngIf="this.Data" class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {{this.Data.description}}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <form [formGroup]="formData">
+            <div class="overflow-x-auto relative">
+                <div class="flex">
+                    <div class="flex flex-col w-full lg:w-4/4">
+                        <mat-form-field class="w-full">
+                            <mat-label class="font-bold">ค้นหาข้อมูล</mat-label>
+                            <input matInput placeholder="ค้นหน้าข้อมูล" (keyup)="onFilter($event)" [formControlName]="'filter'">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="overflow-x-auto relative">
+            <div class="flex">
+                <div class="w-full">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 heroicons_solid row-border hover">
+                        <thead class="text-m text-gray-700 uppercase bg-gray-50 dark:bg-white-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="py-3 px-6 ">
+                                    ลำดับ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ชื่อผู้เสนอราคา
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    เบอร์ติดต่อ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    อีเมล
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ข้อความ
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    ใบเสนอราคา
+                                </th>
+                            </tr>
+                        </thead>
+                        <ng-container *ngIf="this.Data">
+                            <tbody *ngIf="this.Data.user_job_interestings?.length != 0">
+                                <tr *ngFor="let item of this.Data.qoutations; let i = index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                    <td class="py-4 px-6">{{ i+1 }}</td>
+                                    <td class="py-4 px-6">{{item.vendor[0].name}}</td>
+
+                                    <td class="py-4 px-6">{{item.vendor[0].phone}}</td>
+
+                                    <td class="py-4 px-6">{{item.vendor[0].email}}</td>
+
+                                    <td class="py-4 px-6">{{item.remark}}</td>
+
+                                    <td class="py-4 px-6">
+                                        <button mat-button (click)="showPicture(item.path)">
+                                            <mat-icon svgIcon="heroicons_solid:document-duplicate"></mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="this.Data.bank_trans?.length == 0">
+                                <tr>
+                                    <td colspan="6">No Data</td>
+                                </tr>
+                            </tbody>
+                        </ng-container>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flex items-center justify-end w-full border-t px-8 py-4">
+            <div class="flex items-center justify-end">
+                <a class="ml-4" mat-flat-button href="logistic/list">
+                    <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+                    ย้อนกลับ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

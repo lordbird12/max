@@ -1,0 +1,98 @@
+<!-- <div class="row" style="padding: 0px"> -->
+
+<div mat-dialog-title>
+    <h3 mat-dialog-titleclass="modal-title" id="exampleModalLabel" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+        ข้อมูลผู้ใช้งาน
+    </h3>
+
+</div>
+<BR>
+<!-- <form class="flex flex-col mt-3 p-8 pb-4 bg-card shadow overflow-hidden ng-valid" [formGroup]="formData"> -->
+<form [formGroup]="formData">
+
+
+
+    <!-- Name, SKU & etc. -->
+
+    <!--firstname and lastname-->
+    <div class="flex p-5">
+        <mat-form-field class="w-3/12 pr-2" disabled>
+            <mat-label>ชื่อ</mat-label>
+            <input matInput [formControlName]="'first_name'" readonly>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2" disabled>
+            <mat-label>นามสกุล</mat-label>
+            <input matInput [formControlName]="'last_name'" readonly>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2" disabled>
+            <mat-label>รหัสผนักงาน</mat-label>
+            <input matInput [formControlName]="'user_id'" readonly>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2">
+            <mat-label>กำหนดสิทธิ์</mat-label>
+            <mat-select [formControlName]="'permission_id'" disabled>
+                <mat-option *ngFor="let role of roleData" [value]="role.id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!--firstname and lastname-->
+    <div class="flex p-5">
+        <mat-form-field class="w-3/12 pr-2">
+            <mat-label>แผนก</mat-label>
+            <mat-select [formControlName]="'department_id'" disabled>
+                <mat-option *ngFor="let role of departmentData" [value]="role.id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2">
+            <mat-label>ตำแหน่ง</mat-label>
+            <mat-select [formControlName]="'position_id'" disabled>
+                <mat-option *ngFor="let role of positionData" [value]="role.id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2">
+            <mat-label>สาขา</mat-label>
+            <mat-select [formControlName]="'branch_id'" disabled>
+                <mat-option *ngFor="let role of branchData" [value]="role.id">
+                    {{role.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="w-3/12 pr-2" disabled>
+            <mat-label>Email</mat-label>
+            <input matInput [formControlName]="'email'" readonly>
+        </mat-form-field>
+    </div>
+
+
+
+    <div class="flex p-5"  >
+        <div class="flex justify-center items-center w-3/12">
+            
+            <img class="img" [src]="url" style="width: 300px; height: 300px;">
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="flex justify-center items-center w-3/12">
+            <img class="img" [src]="url2" style="width: 300px; height: 300px;">
+            <!-- <ngx-imageviewer [src]="data2.src"></ngx-imageviewer> -->
+        </div>
+    </div>
+
+
+
+</form>
+<!-- <div class="flex items-center justify-end w-full border-t px-8 py-4"> -->
+<!-- <div> -->
+<div class="flex items-center justify-end">
+    <a class="ml-4" mat-flat-button (click)="onClose()">
+        <mat-icon svgIcon="heroicons_solid:x"></mat-icon>
+        ปิด
+    </a>
+
+</div>
+<!-- </div> -->
